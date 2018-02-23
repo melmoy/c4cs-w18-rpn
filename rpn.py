@@ -1,5 +1,19 @@
 #!/usr/bin/env python3
+import operator
+import logging
+import sys
 
+logger = loggin.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+sh = logging.StreamHandler(sys.stdout)
+logger.addHandler(sh)
+
+operators = {
+    '+': operator.add,
+    '-': operator.sub,
+    '*': operator.mul,
+    '/': operator.truediv,
+}
 
 def calculate(arg):
     stack = list()
@@ -8,9 +22,16 @@ def calculate(arg):
             value = int(token)
             stack.append(value)
         except ValueError:
-            arg1 = stack.pop()
+            function = operators[token]
             arg2 = stack.pop()
-            return arg1 + arg2
+            arg1 = stack.pop()
+            result = function(arg1, arg2)
+            stack.append(result)
+        logger.debug(stack)
+    if len(stack) != 1:
+        raise TypeError
+
+    return stack.pop()
 
 
 def main():
