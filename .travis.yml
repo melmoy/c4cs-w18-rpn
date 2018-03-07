@@ -1,5 +1,7 @@
 language: python
 python:
  - "3.5"
+install:
+pip install -r testrpn.py
 script:
  - python3 -m unittest
