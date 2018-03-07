@@ -3,7 +3,7 @@ import operator
 import logging
 import sys
 
-logger = loggin.getLogger(__name__)
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 sh = logging.StreamHandler(sys.stdout)
 logger.addHandler(sh)
